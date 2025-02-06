@@ -102,11 +102,6 @@ class RLOOTrainer(Trainer):
         if data_collator is None:
             data_collator = DataCollatorWithPadding(self.processing_class)
 
-        self.policy.generation_config.eos_token_id = (
-            None  # disable `pad_token_id` and `eos_token_id` because we just want to
-        )
-        self.policy.generation_config.pad_token_id = None  # generate tokens without truncation / padding
-
         self.ref_policy = ref_policy
         self.reward_model = reward_model
         self.train_dataset = train_dataset
